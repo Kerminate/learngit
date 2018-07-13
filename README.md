@@ -5,3 +5,4 @@ commit 1
 commit 2
 commit 3
 behind rebase 1
+behind rebase 2

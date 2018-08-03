@@ -14,7 +14,8 @@ git push origin [你当前的分支]  // 将当前分支提交到远程仓库
 ## 2. 分支管理
 ```
 git checkout -b dev  // 创建新分支 dev，并切换到该分支
-git branch  // 显示所有分支
+git branch  // 显示本地分支
+git branch -a  // 显示所有分支(本地和远程)
 git checkout master  // 切换到 master 分支
 git merge dev  // 将 dev 分支合并到 master 分支
 git branch -d dev  // 将本地的 dev 分支删除
@@ -77,7 +78,20 @@ git revert 57af6d9f0f8e4fdb646e86bd189c2346f6bd5458
 ```
 ![](http://or7tt6rug.bkt.clouddn.com/git-revert1.png)
 
-## 4. 常用技巧
+## 4. 标签管理
+> 标签可以针对某一时间点的版本做标记，常用于版本发布。
+
+```
+git tag  // 输出所有标签
+git tag v1.0  // 创建标签 v1.0
+git show v1.0  // 查看标签 v1.0 的版本信息
+git checkout v1.0  // 切换到 v1.0 标签
+git tag -d v1.0  // 删除 v1.0 标签
+git push origin v1.0  // 将标签 v1.0 提交到远程仓库
+git push origin -tags  // 将所有标签都提交到远程仓库
+```
+
+## 5. 常用技巧
 ### 使用 git stash
 当你正在进行项目开发，已经修改了部分代码，但是发现现有分支上有个 bug 要解决，但你又不想把代码 commit 到本地仓库，这时候可以使用 git stash 储存当前工作目录的中间状态。
 可以直接使用 git stash 储存，也可以通过 git stash save "你的备注" 做一个message
@@ -93,6 +107,11 @@ git stash list
 此时代码已经回到了你修改前的版本，本地修好 bug 后，将代码 push 到远端，再使用 git stash pop 或 git stash apply 来恢复之前的工作状态
 - **git stash pop**: 这个指令将缓存堆栈中的第一个 stash 删除，并将对应修改应用到当前的工作目录下.
 - **git stash apply**: 将缓存堆栈中的stash多次应用到工作目录中，但并不删除stash拷贝.使用该命令时可以通过名字指定使用哪个stash，默认使用最近的stash
+
+示例：
+```
+git stash apply stash{0}  // 将 stash 栈里的第一个恢复
+```
 
 ![](http://or7tt6rug.bkt.clouddn.com/git-stash2.jpg)
 恢复后会显示暂存区内文件的修改情况，与之前一致
